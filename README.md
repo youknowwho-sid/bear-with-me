@@ -1,77 +1,96 @@
-# 🐻 Bear With Me — OBS Overlay
+# 🐻 Bear With Me — Twitch Overlay
 
-Whenever you say "bear with me" on stream, a bear pops up for 5 seconds.
-
----
-
-## ONE-TIME SETUP (takes <10 minutes)
-
-### Step 1 — Install Node.js
-Download and install from: https://nodejs.org  
-(Click the LTS version, install with all defaults)
-
-### Step 2 — Install Python
-Download and install from: https://www.python.org/downloads  
-✅ On the first screen, CHECK "Add Python to PATH" before clicking Install
-
-### Step 3 — Install Python packages
-Open a terminal / command prompt and run:
-```
-pip install vosk sounddevice
-```
-
-### Step 4 — Download the voice model
-1. Go to: https://alphacephei.com/vosk/models
-2. Download **vosk-model-small-en-us-0.15** (about 40MB)
-3. Unzip it
-4. Rename the unzipped folder to just `model`
-5. Put the `model` folder inside this bear-overlay folder
-
-Your folder should look like:
-```
-bear-overlay/
-  model/          ← the voice model goes here
-  overlay.html
-  server.js
-  voice.py
-  START.bat
-  trigger.html
-  README.md
-```
-
-### Step 5 — Install Node packages
-Open a terminal in this folder and run:
-```
-npm install
-```
+A Twitch overlay that listens to your microphone and automatically triggers a bear animation whenever you say **"bear with me"** on stream.
 
 ---
 
-## EVERY STREAM — HOW TO START
+## Requirements
 
-1. **Double-click START.bat** (or run `node server.js` in terminal)
-   - You'll see "🐻 Bear Overlay is running!"
-   - Keep this window open while streaming
+Before anything else, install these two free programs:
 
-2. **Add Browser Source in OBS:**
-   - In OBS, click + under Sources → Browser
+- **Node.js** — [nodejs.org](https://nodejs.org) (click the LTS button, install with all defaults)
+- **Python** — [python.org/downloads](https://python.org/downloads) ⚠️ During install, check **"Add Python to PATH"** on the first screen!
+
+---
+
+## Setup (One Time Only)
+
+1. Download this repo — click the green **Code** button → **Download ZIP**
+2. Unzip the folder somewhere on your computer
+3. Double-click **`INSTALL.bat`** and wait for it to finish
+
+That's it! The installer handles everything else automatically.
+
+---
+
+## Every Stream
+
+1. Double-click **`START.bat`**
+2. First time only — in OBS add a **Browser Source**:
    - URL: `http://localhost:3500`
-   - Width: 1920, Height: 1080
-   - ✅ Check "Shutdown source when not visible"
-   - Click OK
+   - Width: `1920`
+   - Height: `1080`
+3. Say **"bear with me"** on stream and the bear appears! 🐻
 
-3. **That's it!** Say "bear with me" and the bear appears 🐻
-
----
-
-## TESTING
-
-Open `trigger.html` in your browser to manually fire the bear (great for testing your OBS layout).
+> After the first time, you only need to double-click START.bat — OBS remembers the Browser Source.
 
 ---
 
-## CUSTOMIZING
+## Multiple Scenes
 
-- **Change the phrase:** Open `server.js`, find `const PHRASE = 'bear with me'` and change it
-- **Change display time:** In `overlay.html`, find `showBear()` calls and change the `5000` (milliseconds)
-- **Change position:** In `overlay.html` CSS, `left: 50%` controls horizontal position (try `left: 20%` for left side)
+If you have more than one scene in OBS (e.g. a small corner cam and a large center cam), add a Browser Source to each scene with a different URL:
+
+| Scene | URL |
+|---|---|
+| Webcam in bottom-right corner | `http://localhost:3500?pos=right` |
+| Large center webcam | `http://localhost:3500?pos=center` |
+| Webcam in bottom-left corner | `http://localhost:3500?pos=left` |
+
+---
+
+## Manual Trigger
+
+Open `trigger.html` in your browser to fire the bear manually — great for testing your OBS layout before going live.
+
+---
+
+## Customizing
+
+**Change the trigger phrase** — open `server.js` and find:
+```
+const PHRASE = 'bear with me';
+```
+
+**Change how long the bear stays** — open `overlay.html` and find:
+```
+function showBear(ms = 6000)
+```
+Change `6000` to however many milliseconds you want (1000 = 1 second).
+
+**Move the bear left/right** — open `overlay.html` and find:
+```
+wrap.style.right = '340px';
+```
+Increase the number to move it further left, decrease to move it right.
+
+---
+
+## Troubleshooting
+
+**Bear doesn't appear:**
+- Make sure `START.bat` is still running (don't close that window while streaming)
+- Right-click the Browser Source in OBS → Refresh
+
+**Voice not detecting:**
+- Make sure your mic is set as the default recording device in Windows
+- Check the START.bat window — it prints what it hears in real time
+
+**INSTALL.bat failed:**
+- Make sure you checked "Add Python to PATH" during Python install
+- Check your internet connection and run INSTALL.bat again
+
+---
+
+## Privacy
+
+Voice recognition runs **completely offline** using [Vosk](https://alphacephei.com/vosk/). Your mic audio never leaves your computer.
