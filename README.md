@@ -69,7 +69,7 @@ Change `6000` to however many milliseconds you want (1000 = 1 second).
 
 **Move the bear left/right** — open `overlay.html` and find:
 ```
-wrap.style.right = '340px';
+wrap.style.right = '0px';
 ```
 Increase the number to move it further left, decrease to move it right.
 
