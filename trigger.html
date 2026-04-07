@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bear Trigger</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background: #1a1a2e;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 24px;
+  }
+  h1 { font-size: 28px; }
+  p { color: #aaa; font-size: 15px; text-align: center; max-width: 360px; }
+  button {
+    background: #e67e22;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 18px 48px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.1s, background 0.2s;
+  }
+  button:hover { background: #d35400; }
+  button:active { transform: scale(0.96); }
+  #status { font-size: 13px; color: #aaa; margin-top: 8px; }
+</style>
+</head>
+<body>
+  <h1>🐻 Bear Trigger</h1>
+  <p>Click the button to manually trigger the bear overlay in OBS. Use this for testing or as a manual override.</p>
+  <button onclick="trigger()">BEAR WITH ME!</button>
+  <div id="status">Ready</div>
+
+<script>
+  async function trigger() {
+    const s = document.getElementById('status');
+    try {
+      await fetch('http://localhost:3500/trigger', { method: 'POST' });
+      s.textContent = '✅ Triggered! Check OBS.';
+    } catch(e) {
+      s.textContent = '❌ Could not connect — is server.js running?';
+    }
+    setTimeout(() => s.textContent = 'Ready', 3000);
+  }
+</script>
+</body>
+</html>
