@@ -1,15 +1,18 @@
 {
-  "name": "bear-overlay",
+  "name": "bear-with-me",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "Twitch overlay that triggers a bear animation when you say 'bear with me'",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
-    "ws": "^8.20.0"
-  }
+    "ws": "8.18.0"
+  },
+  "keywords": ["twitch", "overlay", "obs", "voice", "stream"],
+  "license": "MIT"
 }
