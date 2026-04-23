@@ -1,4 +1,4 @@
-# 🐻 Bear With Me — Twitch Overlay
+# 🐻 Bear With Me — OBS Overlay for Twitch/Kick/Youtube 
 
 A Twitch overlay that listens to your microphone and automatically triggers a bear animation whenever you say **"bear with me"** on stream.
 
