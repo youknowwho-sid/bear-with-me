@@ -8,8 +8,8 @@ A Twitch overlay that listens to your microphone and automatically triggers a be
 
 Before anything else, install these two free programs:
 
-- **Node.js** — [nodejs.org](https://nodejs.org) (click the LTS button, install with all defaults)
-- **Python** — [python.org/downloads](https://python.org/downloads) ⚠️ During install, check **"Add Python to PATH"** on the first screen!
+- **Node.js v18 or higher** — [nodejs.org](https://nodejs.org) (click the LTS button, install with all defaults)
+- **Python 3.9 or higher** — [python.org/downloads](https://python.org/downloads) ⚠️ During install, check **"Add Python to PATH"** on the first screen!
 
 ---
 
