@@ -13,50 +13,67 @@ echo  Just sit back and wait!
 echo.
 pause
 
-:: ── Check Node.js ─────────────────────────────────────────────────────────
+:: ── Check ALL dependencies first ──────────────────────────────────────────
 echo.
-echo  [1/5] Checking Node.js...
+echo  [1/4] Checking dependencies...
+
+set MISSING=0
+
+:: Check Node.js
 node --version >nul 2>&1
 if %errorlevel% neq 0 (
-    echo.
-    echo  ❌ Node.js is not installed.
-    echo.
-    echo  Please install it first:
-    echo  1. Go to https://nodejs.org
-    echo  2. Click the big LTS button and install it
-    echo  3. Restart your computer
-    echo  4. Run this installer again
-    echo.
-    pause
-    exit /b 1
+    echo  ❌ Node.js is not installed
+    set MISSING=1
+) else (
+    for /f "tokens=2 delims=v." %%a in ('node --version') do set NODE_MAJOR=%%a
+    if !NODE_MAJOR! LSS 18 (
+        echo  ❌ Node.js v18+ required - you have v!NODE_MAJOR!
+        set MISSING=1
+    ) else (
+        echo  ✅ Node.js v!NODE_MAJOR! found
+    )
 )
-echo  ✅ Node.js found!
 
-:: ── Check Python ──────────────────────────────────────────────────────────
-echo.
-echo  [2/5] Checking Python...
+:: Check Python
 python --version >nul 2>&1
 if %errorlevel% neq 0 (
+    echo  ❌ Python is not installed
+    set MISSING=1
+) else (
+    for /f "tokens=2 delims= " %%a in ('python --version') do set PY_VERSION=%%a
+    for /f "tokens=1 delims=." %%a in ("!PY_VERSION!") do set PY_MAJOR=%%a
+    for /f "tokens=2 delims=." %%a in ("!PY_VERSION!") do set PY_MINOR=%%a
+    if !PY_MAJOR! LSS 3 (
+        echo  ❌ Python 3.9+ required - you have !PY_VERSION!
+        set MISSING=1
+    ) else if !PY_MAJOR! EQU 3 if !PY_MINOR! LSS 9 (
+        echo  ❌ Python 3.9+ required - you have !PY_VERSION!
+        set MISSING=1
+    ) else (
+        echo  ✅ Python !PY_VERSION! found
+    )
+)
+
+:: Exit if anything is missing
+if %MISSING% EQU 1 (
     echo.
-    echo  ❌ Python is not installed.
+    echo  ─────────────────────────────────────────────
+    echo  Please install the missing items above:
     echo.
-    echo  Please install it first:
-    echo  1. Go to https://python.org/downloads
-    echo  2. Download and run the installer
-    echo  ⚠️  IMPORTANT: Check "Add Python to PATH" on the first screen!
-    echo  3. Restart your computer
-    echo  4. Run this installer again
+    echo  Node.js v18+  →  https://nodejs.org
+    echo  Python 3.9+   →  https://python.org/downloads
+    echo  ⚠️  During Python install: check "Add Python to PATH"!
+    echo.
+    echo  Then restart your computer and run this again.
+    echo  ─────────────────────────────────────────────
     echo.
     pause
     exit /b 1
 )
-echo  ✅ Python found!
 
 :: ── Install Python packages ───────────────────────────────────────────────
 echo.
-echo  [3/5] Installing voice detection packages...
-echo  (this may take a minute)
-echo.
+echo  [2/4] Installing voice detection packages...
 pip install vosk sounddevice >nul 2>&1
 if %errorlevel% neq 0 (
     echo  ❌ Failed to install packages. Check your internet connection and try again.
@@ -67,7 +84,7 @@ echo  ✅ Voice packages installed!
 
 :: ── Install Node packages ─────────────────────────────────────────────────
 echo.
-echo  [4/5] Installing server packages...
+echo  [3/4] Installing server packages...
 cd /d "%~dp0"
 npm install >nul 2>&1
 if %errorlevel% neq 0 (
@@ -79,7 +96,7 @@ echo  ✅ Server packages installed!
 
 :: ── Download voice model ──────────────────────────────────────────────────
 echo.
-echo  [5/5] Downloading voice recognition model (~40MB)...
+echo  [4/4] Downloading voice recognition model (~40MB)...
 echo  (this may take a few minutes depending on your internet)
 echo.
 
@@ -88,7 +105,6 @@ if exist "%~dp0model" (
     goto :model_done
 )
 
-:: Use Python to download and extract the model
 python -c "
 import urllib.request, zipfile, os, sys, shutil
 
@@ -100,7 +116,7 @@ print('  Downloading...', flush=True)
 
 def progress(count, block_size, total_size):
     pct = int(count * block_size * 100 / total_size)
-    print(f'  {min(pct,100)}%%', end='\r', flush=True)
+    print(f'  {min(pct,100)}%%', end=chr(13), flush=True)
 
 urllib.request.urlretrieve(url, dest, progress)
 print('  Download complete! Extracting...', flush=True)
