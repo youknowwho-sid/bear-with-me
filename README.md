@@ -4,22 +4,14 @@ An OBS overlay that listens to your microphone and automatically triggers a bear
 
 ---
 
-## Requirements
-
-Before anything else, install these two free programs:
-
-- **Node.js v18 or higher** — [nodejs.org](https://nodejs.org) (click the LTS button, install with all defaults)
-- **Python 3.9 or higher** — [python.org/downloads](https://python.org/downloads) ⚠️ During install, check **"Add Python to PATH"** on the first screen!
-
----
-
 ## Setup (One Time Only)
 
-1. Download this repo — click the green **Code** button → **Download ZIP**
+1. Download this repo — click the green Code button → Download ZIP
 2. Unzip the folder somewhere on your computer
-3. Double-click **`INSTALL.bat`** and wait for it to finish
+3. Right-click INSTALL.bat → **Run as administrator**
+4. Wait for it to finish, it installs everything automatically!
 
-That's it! The installer handles everything else automatically.
+That's it!
 
 ---
 
@@ -28,9 +20,7 @@ That's it! The installer handles everything else automatically.
 1. Double-click **`START.bat`**
 2. First time only — in OBS add a **Browser Source**:
    - URL: `http://localhost:3500`
-   - Width: `1920`
-   - Height: `1080`
-3. Say **"bear with me"** on stream and the bear appears! 🐻
+3. Say **"Bear with me"** on stream and the bear appears! 🐻
 
 > After the first time, you only need to double-click START.bat — OBS remembers the Browser Source.
 
