@@ -16,6 +16,9 @@ An OBS overlay that listens to your microphone and automatically triggers a bear
    <img width="316" height="206" alt="image" src="https://github.com/user-attachments/assets/16312328-d911-4298-8d36-0253c48e3d22" />
 
 4. Wait for it to finish, it installs everything automatically!
+> You can verify  by checking if **`node_modules`** and **`model`** folders are created in your directory
+   <img width="183" height="111" alt="image" src="https://github.com/user-attachments/assets/0b123311-dba9-4c77-8a56-87a4fe27adc0" />
+
 
 That's it!
 
