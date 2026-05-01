@@ -10,6 +10,8 @@ An OBS overlay that listens to your microphone and automatically triggers a bear
    <img width="706" height="390" alt="image" src="https://github.com/user-attachments/assets/81cc5a47-565c-4740-a3e1-df6555bbc4f5" />
 
 2. Unzip the folder somewhere on your computer
+   <img width="519" height="451" alt="image" src="https://github.com/user-attachments/assets/6173e96c-feba-4f31-966b-eb1b88e38211" />
+
 3. Right-click INSTALL.bat → **Run as administrator**
 4. Wait for it to finish, it installs everything automatically!
 
