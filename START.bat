@@ -1,17 +1,17 @@
 @echo off
-title Bear With Me 🐻
+title Bear With Me 
 color 0A
 cd /d "%~dp0"
 
 echo.
 echo  =============================================
-echo   🐻  Bear With Me - Starting...
+echo    [Bear With Me] - Starting...
 echo  =============================================
 echo.
 
 :: Check if setup has been done
 if not exist "model" (
-    echo  ⚠️  Looks like you haven't run the installer yet!
+    echo  [CHECK]  Looks like you haven't run the installer yet!
     echo.
     echo  Please double-click INSTALL.bat first, then come back.
     echo.
@@ -24,7 +24,7 @@ if not exist "node_modules" (
     npm install >nul 2>&1
 )
 
-echo  ✅ Running! 
+echo   [OK] Running! 
 echo.
 echo  In OBS, add a Browser Source with this URL:
 echo.
