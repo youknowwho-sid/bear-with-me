@@ -46,11 +46,18 @@ const clients = new Set();
 
 wss.on('connection', (ws) => {
   clients.add(ws);
-  console.log('[WS] Overlay connected');
-  ws.on('close', () => clients.delete(ws));
+  console.log(`[WS] Overlay connected (${clients.size} connected)`);
+  ws.on('close', () => {
+    clients.delete(ws);
+    console.log(`[WS] Overlay disconnected (${clients.size} connected)`);
+  });
 });
 
+// Debounce broadcast so rapid triggers from voice only fire once
+let broadcastTimer = null;
 function broadcast(msg) {
+  if (broadcastTimer) return;
+  broadcastTimer = setTimeout(() => { broadcastTimer = null; }, 6000);
   console.log('[TRIGGER] Sending bear!');
   for (const client of clients) {
     if (client.readyState === 1) client.send(msg);
