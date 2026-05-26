@@ -12,10 +12,10 @@ An OBS overlay that listens to your microphone and automatically triggers a bear
 2. Unzip the folder somewhere on your computer
    <img width="519" height="451" alt="image" src="https://github.com/user-attachments/assets/6173e96c-feba-4f31-966b-eb1b88e38211" />
 
-3. Right-click INSTALL.bat → **Run as administrator**
+4. Right-click INSTALL.bat → **Run as administrator**
    <img width="732" height="412" alt="image" src="https://github.com/user-attachments/assets/16312328-d911-4298-8d36-0253c48e3d22" />
 
-4. Wait for it to finish, it installs everything automatically!
+5. Wait for it to finish, it installs everything automatically!
 > You can verify  by checking if **`node_modules`** and **`model`** folders are created in your directory
    <img width="732" height="444" alt="image" src="https://github.com/user-attachments/assets/0b123311-dba9-4c77-8a56-87a4fe27adc0" />
 
