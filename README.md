@@ -53,6 +53,12 @@ Open `trigger.html` in your browser to fire the bear manually — great for test
 
 ---
 
+## Closing the Terminal 
+
+Terminate **`START.bat`** using `Ctrl + C` and then enter 'Y'.  
+
+---
+
 ## Customizing
 
 **Change the trigger phrase** — open `server.js` and find:
